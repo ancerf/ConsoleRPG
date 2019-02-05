@@ -17,7 +17,7 @@ namespace ConsoleRPG
         public Weapon(int level, int rarity) : base((int)itemTypes.WEAPON, level, rarity)
         {
             initNames();
-            damageMax = random.Next(1, level * (rarity+1)) + (rarity+1) * 5;
+            damageMax = random.Next(1, (level * (rarity+1)+1)) + (rarity+1) * 5;
             damageMin = damageMax / 2;
             name = names[random.Next(0, names.Count)];
 

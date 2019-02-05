@@ -19,7 +19,7 @@ namespace ConsoleRPG
             level = 1;
             exp = 20;
 
-            hp = 20;
+            hp = 200;
 
             strength = 1;
             vitality = 1;
@@ -96,7 +96,7 @@ namespace ConsoleRPG
             accuracy = dexterity / 2 + intelligence;
             luck = intelligence;
 
-            hp = hpMax; //NOT SURE IF REEALLY NEEDED
+            //hp = hpMax; //NOT SURE IF REEALLY NEEDED
         }
 
         public void levelUp()

@@ -158,6 +158,55 @@ namespace ConsoleRPG
                                             gainExp = enemies[choice].getExp();
                                             character.gainExp(gainExp);
                                             Console.WriteLine($"EXP gained {gainExp}! \n");
+
+                                            //Item roll
+                                            int roll = random.Next(1, 100);
+                                            int rarity = -1;
+
+                                            if (roll > 20)
+                                            {
+                                                rarity = 0; //Common
+
+                                                roll = random.Next(1, 100);
+                                                if (roll > 30)
+                                                {
+                                                    rarity = 1; //Uncommon
+
+                                                    roll = random.Next(1, 100);
+                                                    if (roll > 50)
+                                                    {
+                                                        rarity = 2; //Rare
+
+                                                        roll = random.Next(1, 100);
+                                                        if (roll > 70)
+                                                        {
+                                                            rarity = 3; //Legendary
+
+                                                            roll = random.Next(1, 100);
+                                                            if (roll > 79)
+                                                            {
+                                                                rarity = 4; //Mychic
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if(roll >= 0)
+                                            {
+                                                roll = random.Next(1, 100);
+
+                                                if(roll >50)
+                                                {
+                                                    character.addItem(new Weapon((int)character.level, rarity));
+                                                    Console.WriteLine("Weapon drop!");
+                                                }
+                                                else
+                                                {
+                                                    character.addItem(new Armor((int)character.level, rarity));
+                                                    Console.WriteLine("Armor drop!");
+                                                }
+                                            }
+
                                             enemies.RemoveAt(choice);
                                         }
 

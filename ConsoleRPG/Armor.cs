@@ -17,7 +17,7 @@ namespace ConsoleRPG
         public Armor(int level, int rarity) : base((int)itemTypes.ARMOR ,level, rarity)
         {
             initNames();
-            defence = random.Next(1, level * (rarity+1)) + (rarity+1) * 5;
+            defence = random.Next(1, (level * (rarity+1))+1) + (rarity+1) * 5;
             type = random.Next(0, 4);
             name = names[random.Next(0, names.Count)];
 

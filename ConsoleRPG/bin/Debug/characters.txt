@@ -1,2 +1,2 @@
-Gleb 0 100 1 20 1 1 1 1 5 1 0
-
+aaa 2 100 1 744 1 1 1 1 102 1 0
+0 Face_Shredder 1 0 0 0 3 6 1 Cotton_Rag 1 -1 -10 -5 1 1 1 Angels_Balls 1 2 20 10 17 3 1 Bro_Saver 1 0 0 0 6 2 
