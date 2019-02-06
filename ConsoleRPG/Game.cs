@@ -185,9 +185,12 @@ namespace ConsoleRPG
             {
                 for (int i = 0; i < characters.Count; i++)
                 {
-                    writetext.WriteLine($"{characters[i].getAsString()}");
+                    writetext.WriteLine($"3 {characters[i].getAsString()}");
                     //Console.WriteLine($"{characters[i].getAsString()}");
-                    writetext.WriteLine($"{characters[i].getInvAsStringSave()}");
+                    if (characters[i].getInvAsStringSave() != "")
+                    {
+                        writetext.WriteLine($"{characters[i].getInvAsStringSave()}");
+                    }
                 }
             }
         }
@@ -223,229 +226,375 @@ namespace ConsoleRPG
             int sellValue = 0;
             int rarity = 0;
 
-            //using (StreamReader readtext = new StreamReader(fileName))
-            //{
-            //
-            //    while ((profile = readtext.ReadLine()) != null)
-            //    {
-            //        end = false;
-            //        List <string> itemsList = new List<string>();
-            //
-            //        itemsList = profile.Split(' ').ToList();
-            //
-            //        //string[] items = profile.Split(' ');
-            //
-            //        Character temp = new Character();
-            //
-            //        if (itemsList.Count == 12)
-            //        {
-            //
-            //            name = itemsList[0];
-            //            int.TryParse(itemsList[1], out distanceTravelled);
-            //            int.TryParse(itemsList[2], out gold);
-            //            int.TryParse(itemsList[3], out level);
-            //            int.TryParse(itemsList[4], out exp);
-            //            int.TryParse(itemsList[5], out strength);
-            //            int.TryParse(itemsList[6], out vitality);
-            //            int.TryParse(itemsList[7], out dexterity);
-            //            int.TryParse(itemsList[8], out intelligence);
-            //            int.TryParse(itemsList[9], out hp);
-            //            int.TryParse(itemsList[10], out stamina);
-            //            int.TryParse(itemsList[11], out statPoints);
-            //
-            //            temp = new Character
-            //            {
-            //                name = name,
-            //                distanceTravelled = distanceTravelled,
-            //                gold = gold,
-            //                level = level,
-            //                exp = exp,
-            //                strength = strength,
-            //                vitality = vitality,
-            //                dexterity = dexterity,
-            //                intelligence = intelligence,
-            //                hp = hp,
-            //                stamina = stamina,
-            //                statPoints = statPoints
-            //            };
-            //
-            //            temp.updateStats(); //updating formulas/statistics
-            //
-            //            //Weapon
-            //            int.TryParse(itemsList[h], out itemType);
-            //            name = itemsList[h];
-            //            h++;
-            //            int.TryParse(itemsList[h], out level);
-            //            h++;
-            //            int.TryParse(itemsList[h], out rarity);
-            //            h++;
-            //            int.TryParse(itemsList[h], out buyValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out sellValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out damageMin);
-            //            h++;
-            //            int.TryParse(itemsList[h], out damageMax);
-            //
-            //            Weapon weapon = new Weapon { damageMin = damageMin, damageMax = damageMax, name = name, level = level, itemType = itemType, rarity = rarity, buyValue = buyValue, sellValue = sellValue};
-            //            temp.weapon = weapon;
-            //
-            //            //Armors head
-            //            int.TryParse(itemsList[h], out itemType);
-            //            name = itemsList[h];
-            //            h++;
-            //            int.TryParse(itemsList[h], out level);
-            //            h++;
-            //            int.TryParse(itemsList[h], out rarity);
-            //            h++;
-            //            int.TryParse(itemsList[h], out buyValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out sellValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out defence);
-            //            h++;
-            //            int.TryParse(itemsList[h], out type);
-            //
-            //            Armor armor_head = new Armor { type = type, defence = defence, name = name,  level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity};
-            //            temp.armor_head = armor_head;
-            //
-            //            //armors chest
-            //            int.TryParse(itemsList[h], out itemType);
-            //            name = itemsList[h];
-            //            h++;
-            //            int.TryParse(itemsList[h], out level);
-            //            h++;
-            //            int.TryParse(itemsList[h], out rarity);
-            //            h++;
-            //            int.TryParse(itemsList[h], out buyValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out sellValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out defence);
-            //            h++;
-            //            int.TryParse(itemsList[h], out type);
-            //
-            //            Armor armor_chest = new Armor { type = type, defence = defence, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity };
-            //            temp.armor_chest = armor_chest;
-            //
-            //            //armors arms
-            //            int.TryParse(itemsList[h], out itemType);
-            //            name = itemsList[h];
-            //            h++;
-            //            int.TryParse(itemsList[h], out level);
-            //            h++;
-            //            int.TryParse(itemsList[h], out rarity);
-            //            h++;
-            //            int.TryParse(itemsList[h], out buyValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out sellValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out defence);
-            //            h++;
-            //            int.TryParse(itemsList[h], out type);
-            //
-            //            Armor armor_arms = new Armor { type = type, defence = defence, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity };
-            //            temp.armor_arms = armor_arms;
-            //
-            //            //armors legs
-            //            int.TryParse(itemsList[h], out itemType);
-            //            name = itemsList[h];
-            //            h++;
-            //            int.TryParse(itemsList[h], out level);
-            //            h++;
-            //            int.TryParse(itemsList[h], out rarity);
-            //            h++;
-            //            int.TryParse(itemsList[h], out buyValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out sellValue);
-            //            h++;
-            //            int.TryParse(itemsList[h], out defence);
-            //            h++;
-            //            int.TryParse(itemsList[h], out type);
-            //
-            //            Armor armor_legs = new Armor { type = type, defence = defence, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity };
-            //            characters[activeCharacter].armor_legs = armor_legs;
-            //
-            //        }
-            //
-            //        else
-            //        {
-            //            
-            //
-            //            
-            //            
-            //            int h = -1;
-            //            int position = 0;
-            //            while (end == false)
-            //            {
-            //                for (int i = position; i < itemsList.Count -2; i++)
-            //                {
-            //                    h++;
-            //                    int.TryParse(itemsList[h], out itemType);
-            //                    h++;
-            //                    if (itemType == 0)
-            //                    {
-            //                        name = itemsList[h];
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out level);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out rarity);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out buyValue);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out sellValue);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out damageMin);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out damageMax);
-            //
-            //                        temp.addItem(new Weapon { damageMin = damageMin, damageMax = damageMax, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity });
-            //                    }
-            //
-            //                    else if(itemType == 1)
-            //                    {
-            //
-            //                        name = itemsList[h];
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out level);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out rarity);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out buyValue);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out sellValue);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out defence);
-            //                        h++;
-            //                        int.TryParse(itemsList[h], out type);
-            //
-            //                        temp.addItem(new Armor { type = type, defence = defence, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity });
-            //
-            //                    }
-            //
-            //                    characters.Add(temp);
-            //                    i = i + 7;
-            //
-            //                    if (h == (itemsList.Count -2))
-            //                        end = true;
-            //
-            //                }
-            //
-            //                
-            //            }
-            //
-            //            
-            //
-            //            
-            //
-            //            Console.WriteLine($"Character {temp.name} loaded!");
-            //        }
-            //    }
-            //}
+            using (StreamReader readtext = new StreamReader(fileName))
+            {
 
-            if (characters.Count <= 0)
-                Console.WriteLine("No chracters found!");
+                Character temp = new Character();
+                bool secondCharacter = false;
+
+                while ((profile = readtext.ReadLine()) != null)
+                {
+
+
+                    end = false;
+                        List<string> itemsList = new List<string>();
+
+                        itemsList = profile.Split(' ').ToList();
+                    if(itemsList[0] == "")
+                    {
+                        break;
+                    }
+
+                    //string[] items = profile.Split(' ');
+
+                    if (Convert.ToInt32(itemsList[0]) == 3)
+                    {
+                        if (secondCharacter)
+                        {
+                            characters.Add(temp);
+                        }
+
+                        if (profile != null)
+                        {
+
+                            name = itemsList[1];
+                            int.TryParse(itemsList[2], out distanceTravelled);
+                            int.TryParse(itemsList[3], out gold);
+                            int.TryParse(itemsList[4], out level);
+                            int.TryParse(itemsList[5], out exp);
+                            int.TryParse(itemsList[6], out strength);
+                            int.TryParse(itemsList[7], out vitality);
+                            int.TryParse(itemsList[8], out dexterity);
+                            int.TryParse(itemsList[9], out intelligence);
+                            int.TryParse(itemsList[10], out hp);
+                            int.TryParse(itemsList[11], out stamina);
+                            int.TryParse(itemsList[12], out statPoints);
+
+                            temp = new Character
+                            {
+                                name = name,
+                                distanceTravelled = distanceTravelled,
+                                gold = gold,
+                                level = level,
+                                exp = exp,
+                                strength = strength,
+                                vitality = vitality,
+                                dexterity = dexterity,
+                                intelligence = intelligence,
+                                hp = hp,
+                                stamina = stamina,
+                                statPoints = statPoints
+                            };
+
+                            temp.updateStats(); //updating formulas/statistics
+
+                            bool whil = true;
+                            int actualPosition = 13;
+
+
+                            while (whil)
+                            {
+                                if (Convert.ToInt32(itemsList[actualPosition]) == 0)
+                                {
+                                    //Weapon
+                                    int.TryParse(itemsList[actualPosition], out itemType);
+                                    actualPosition++;
+                                    name = itemsList[actualPosition];
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out level);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out rarity);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out buyValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out sellValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out damageMin);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out damageMax);
+
+                                    Weapon weapon = new Weapon(level, rarity) { damageMin = damageMin, damageMax = damageMax, name = name, itemType = itemType, buyValue = buyValue, sellValue = sellValue };
+                                    temp.weapon = weapon;
+                                }
+
+                                else if (Convert.ToInt32(itemsList[actualPosition]) == 1 && Convert.ToInt32(itemsList[actualPosition + 7]) == 0)
+                                {
+                                    //Armors head
+                                    int.TryParse(itemsList[actualPosition], out itemType);
+                                    actualPosition++;
+                                    name = itemsList[actualPosition];
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out level);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out rarity);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out buyValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out sellValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out defence);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out type);
+                                    actualPosition++;
+
+                                    Armor armor_head = new Armor(level, rarity, type) {defence = defence, name = name, buyValue = buyValue, sellValue = sellValue };
+                                    temp.armor_head = armor_head;
+                                }
+
+                                else if (Convert.ToInt32(itemsList[actualPosition]) == 1 && Convert.ToInt32(itemsList[actualPosition + 7]) == 1)
+                                {
+                                    //armors chest
+                                    int.TryParse(itemsList[actualPosition], out itemType);
+                                    actualPosition++;
+                                    name = itemsList[actualPosition];
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out level);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out rarity);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out buyValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out sellValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out defence);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out type);
+
+                                    Armor armor_chest = new Armor(level, rarity, type) { defence = defence, name = name, buyValue = buyValue, sellValue = sellValue };
+                                    temp.armor_chest = armor_chest;
+                                }
+
+
+
+
+                                else if (Convert.ToInt32(itemsList[actualPosition]) == 1 && Convert.ToInt32(itemsList[actualPosition + 7]) == 2)
+                                {
+                                    //armors arms
+                                    int.TryParse(itemsList[actualPosition], out itemType);
+                                    actualPosition++;
+                                    name = itemsList[actualPosition];
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out level);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out rarity);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out buyValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out sellValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out defence);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out type);
+
+                                    Armor armor_arms = new Armor(level, rarity, type) { defence = defence, name = name, buyValue = buyValue, sellValue = sellValue };
+                                    temp.armor_arms = armor_arms;
+                                }
+
+
+                                else if (Convert.ToInt32(itemsList[actualPosition]) == 1 && Convert.ToInt32(itemsList[actualPosition + 7]) == 3)
+                                {
+                                    //armors legs
+                                    int.TryParse(itemsList[actualPosition], out itemType);
+                                    actualPosition++;
+                                    name = itemsList[actualPosition];
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out level);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out rarity);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out buyValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out sellValue);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out defence);
+                                    actualPosition++;
+                                    int.TryParse(itemsList[actualPosition], out type);
+
+                                    Armor armor_legs = new Armor(level, rarity, type) { defence = defence, name = name, buyValue = buyValue, sellValue = sellValue };
+                                    temp.armor_legs = armor_legs;
+                                }
+
+                                else if (Convert.ToInt32(itemsList[actualPosition]) == -1 && actualPosition == 12)
+                                {
+                                    actualPosition += 7;
+                                }
+
+                                else if(Convert.ToInt32(itemsList[actualPosition]) == - 1)
+                                {
+                                    actualPosition += 7;
+                                }
+
+
+                                actualPosition++;
+                                if (actualPosition + 1 == itemsList.Count)
+                                    whil = false;
+                            }
+                            Console.WriteLine($"Character {temp.name} loaded!");
+                            secondCharacter = true;
+                        }
+                    }
+                    else if (Convert.ToInt32(itemsList[0]) == 0 || Convert.ToInt32(itemsList[0]) == 1)
+                    {
+                        int h = 0;
+                        int position = 0;
+                        while (end == false)
+                        {
+                            if (itemsList.Count == 1)
+                                end = true;
+                            for (int i = position; i < itemsList.Count - 2; i++)
+                            {
+                                int.TryParse(itemsList[h], out itemType);
+                                h++;
+                                if (itemType == 0)
+                                {
+                                    name = itemsList[h];
+                                    h++;
+                                    int.TryParse(itemsList[h], out level);
+                                    h++;
+                                    int.TryParse(itemsList[h], out rarity);
+                                    h++;
+                                    int.TryParse(itemsList[h], out buyValue);
+                                    h++;
+                                    int.TryParse(itemsList[h], out sellValue);
+                                    h++;
+                                    int.TryParse(itemsList[h], out damageMin);
+                                    h++;
+                                    int.TryParse(itemsList[h], out damageMax);
+                                    h++;
+            
+                                    temp.addItem(new Weapon(level, rarity) { damageMin = damageMin, damageMax = damageMax, name = name, buyValue = buyValue, sellValue = sellValue});
+                                }
+            
+                                else if(itemType == 1)
+                                {
+            
+                                    name = itemsList[h];
+                                    h++;
+                                    int.TryParse(itemsList[h], out level);
+                                    h++;
+                                    int.TryParse(itemsList[h], out rarity);
+                                    h++;
+                                    int.TryParse(itemsList[h], out buyValue);
+                                    h++;
+                                    int.TryParse(itemsList[h], out sellValue);
+                                    h++;
+                                    int.TryParse(itemsList[h], out defence);
+                                    h++;
+                                    int.TryParse(itemsList[h], out type);
+                                    h++;
+            
+                                    temp.addItem(new Armor (level, rarity, type) {defence = defence, name = name,  buyValue = buyValue, sellValue = sellValue});
+            
+                                }
+            
+                                
+                                i = i + 7;
+            
+                                if (h == (itemsList.Count -1))
+                                    end = true;
+            
+                            }
+                            
+
+                        }
+
+                        characters.Add(temp);
+                        secondCharacter = false;
+                        temp = null;
+                    }
+
+                }
+                
+                if (secondCharacter = true && temp != null)
+                {
+                    characters.Add(temp);
+                }
+                else
+                {
+                    if (characters.Count <= 0)
+                        Console.WriteLine("No chracters found!");
+                }
+            }
         }
+
+        //            else
+        //            {
+        //                
+        //    
+        //                
+        //                
+        //                int h = -1;
+        //                int position = 0;
+        //                while (end == false)
+        //                {
+        //                    for (int i = position; i < itemsList.Count -2; i++)
+        //                    {
+        //                        h++;
+        //                        int.TryParse(itemsList[h], out itemType);
+        //                        h++;
+        //                        if (itemType == 0)
+        //                        {
+        //                            name = itemsList[h];
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out level);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out rarity);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out buyValue);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out sellValue);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out damageMin);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out damageMax);
+        //    
+        //                            temp.addItem(new Weapon { damageMin = damageMin, damageMax = damageMax, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity });
+        //                        }
+        //    
+        //                        else if(itemType == 1)
+        //                        {
+        //    
+        //                            name = itemsList[h];
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out level);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out rarity);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out buyValue);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out sellValue);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out defence);
+        //                            h++;
+        //                            int.TryParse(itemsList[h], out type);
+        //    
+        //                            temp.addItem(new Armor { type = type, defence = defence, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity });
+        //    
+        //                        }
+        //    
+        //                        characters.Add(temp);
+        //                        i = i + 7;
+        //    
+        //                        if (h == (itemsList.Count -2))
+        //                            end = true;
+        //    
+        //                    }
+        //    
+        //                    
+        //                }
+        //    
+        //                
+        //    
+        //                
+        //    
+        //                Console.WriteLine($"Character {temp.name} loaded!");
+        //            }
+        //        }
+        //    }
+        //
+        //    if (characters.Count <= 0)
+        //        Console.WriteLine("No chracters found!");
+        //}
 
         public void selectCharacter()
         {

@@ -17,7 +17,7 @@ namespace ConsoleRPG
         public Item(int itemType, int level, int rarity)
         {
             this.rarity = rarity;
-            this.level = random.Next(1, level);
+            this.level = random.Next(0, level);
             buyValue = level * rarity * 10;
             sellValue = buyValue / 2;
             this.itemType = itemType;
@@ -29,7 +29,7 @@ namespace ConsoleRPG
         public int level { get; set; } = 0;
         public int buyValue { get; set; } = 0;
         public int sellValue { get; set; } = 0;
-        public int rarity { get; set; } = -1;
+        public int rarity { get; set; } = 0;
         public int itemType { get; set; } = -1;
 
         //if constructors wouldn't work

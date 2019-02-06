@@ -144,7 +144,7 @@ namespace ConsoleRPG
                                     Console.WriteLine($"Player role: {combatRollPlayer}");
                                     Console.WriteLine($"Enemy role: {combatRollEnemy}");
 
-                                    if (combatRollPlayer > combatRollEnemy)//hit
+                                    if (combatRollPlayer < combatRollEnemy)//hit
                                     {
                                         Console.WriteLine("HIT!");
                                         damage = random.Next(character.damageMin, character.damageMax);
@@ -161,31 +161,31 @@ namespace ConsoleRPG
 
                                             //Item roll
                                             int roll = random.Next(1, 100);
-                                            int rarity = -1;
+                                            int rarity = 0;
 
                                             if (roll > 20)
                                             {
-                                                rarity = 0; //Common
+                                                rarity = 1; //Common
 
                                                 roll = random.Next(1, 100);
                                                 if (roll > 30)
                                                 {
-                                                    rarity = 1; //Uncommon
+                                                    rarity = 2; //Uncommon
 
                                                     roll = random.Next(1, 100);
                                                     if (roll > 50)
                                                     {
-                                                        rarity = 2; //Rare
+                                                        rarity = 3; //Rare
 
                                                         roll = random.Next(1, 100);
                                                         if (roll > 70)
                                                         {
-                                                            rarity = 3; //Legendary
+                                                            rarity = 4; //Legendary
 
                                                             roll = random.Next(1, 100);
                                                             if (roll > 79)
                                                             {
-                                                                rarity = 4; //Mychic
+                                                                rarity = 5; //Mychic
                                                             }
                                                         }
                                                     }
@@ -202,7 +202,7 @@ namespace ConsoleRPG
                                                 }
                                                 else
                                                 {
-                                                    character.addItem(new Armor((int)character.level, rarity));
+                                                    character.addItem(new Armor((int)character.level, rarity, -1));
                                                     Console.WriteLine("Armor drop!");
                                                 }
                                             }

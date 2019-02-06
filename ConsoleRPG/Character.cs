@@ -145,7 +145,12 @@ namespace ConsoleRPG
                 + intelligence.ToString() + " "
                 + hp.ToString() + " "
                 + stamina.ToString() + " "
-                + statPoints.ToString();
+                + statPoints.ToString() + " "
+                + weapon.toStringSave()
+                + armor_head.toStringSave()
+                + armor_chest.toStringSave()
+                + armor_arms.toStringSave()
+                + armor_legs.toStringSave();
         }
 
         public string getInvAsString()
@@ -321,11 +326,17 @@ namespace ConsoleRPG
         public int distanceTravelled { get; set; }
 
         Inventory inventory = new Inventory();
-        Weapon weapon = new Weapon();
-        Armor armor_head = new Armor();
-        Armor armor_chest = new Armor();
-        Armor armor_arms = new Armor();
-        Armor armor_legs = new Armor();
+        //Weapon weapon = new Weapon();
+        //Armor armor_head = new Armor();
+        //Armor armor_chest = new Armor();
+        //Armor armor_arms = new Armor();
+        //Armor armor_legs = new Armor();
+
+        public Weapon weapon { get; set; } = new Weapon();
+        public Armor armor_head { get; set; } = new Armor();
+        public Armor armor_chest { get; set; } = new Armor();
+        public Armor armor_arms { get; set; } = new Armor();
+        public Armor armor_legs { get; set; } = new Armor();
 
         Random random = new Random();
 
