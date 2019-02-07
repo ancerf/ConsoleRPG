@@ -21,10 +21,10 @@ namespace ConsoleRPG
 
             hp = 200;
 
-            strength = 1;
-            vitality = 1;
-            dexterity = 1;
-            intelligence = 1;
+            strength = 5;
+            vitality = 5;
+            dexterity = 5;
+            intelligence = 5;
 
             statPoints = 0;
 
@@ -65,20 +65,24 @@ namespace ConsoleRPG
             //{
             //    Console.WriteLine($"{(i.ToString())}: {inventory[i].toString()}");
             //}
-            
+
             Console.WriteLine($"= Weapon: {weapon.name} " +
                 $"Lvl: {weapon.level} " +
                 $"Dam {weapon.damageMin} - {weapon.damageMax}");
-            Console.WriteLine($"= Armor: {armor_head.name} " +
+
+            Console.WriteLine($"= Armor (head) : {armor_head.name} " +
                 $"Lvl: {armor_head.level} " +
                 $"Def: {armor_head.defence}");
-            Console.WriteLine($"= Armor: {armor_chest.name} " +
+
+            Console.WriteLine($"= Armor (chest): {armor_chest.name} " +
                 $"Lvl: {armor_chest.level} " +
                 $"Def: {armor_chest.defence}");
-            Console.WriteLine($"= Armor: {armor_arms.name} " +
+
+            Console.WriteLine($"= Armor (arms) : {armor_arms.name} " +
                 $"Lvl: {armor_arms.level} " +
                 $"Def: {armor_arms.defence}");
-            Console.WriteLine($"= Armor: {armor_legs.name} " +
+
+            Console.WriteLine($"= Armor (legs) : {armor_legs.name} " +
                 $"Lvl: {armor_legs.level} " +
                 $"Def: {armor_legs.defence}\n");
         }
@@ -87,7 +91,7 @@ namespace ConsoleRPG
         {
             expNext = ((50 / 3) * ((Math.Pow(level, 3) - 6 * Math.Pow(level, 2)) + 17 * level - 12)) + 100; //formula for harder next levels
 
-            hpMax = (int)(vitality / 2 + strength / 2 + level * 5);
+            hpMax = (int)((vitality * 5) + (strength) + (level * 5));
             staminaMax = vitality + strength / 2 + dexterity / 3;
             stamina = staminaMax;
             damageMin = strength;
@@ -96,7 +100,7 @@ namespace ConsoleRPG
             accuracy = dexterity / 2 + intelligence;
             luck = intelligence;
 
-            //hp = hpMax; //NOT SURE IF REEALLY NEEDED
+            hp = hpMax; //NOT SURE IF REEALLY NEEDED
         }
 
         public void levelUp()
@@ -153,15 +157,26 @@ namespace ConsoleRPG
                 + armor_legs.toStringSave();
         }
 
-        public string getInvAsString()
+        public string getInvAsString(bool shop = false)
         {
             string inv = null;
 
-            for (int i = 0; i < inventory.size(); i++)
+            if (shop)
             {
-                inv += i.ToString() + ": " + inventory[i].toString() + "\n";
+                for (int i = 0; i < inventory.size(); i++)
+                {
+                    inv += i.ToString() + ": " + inventory[i].toString() + " |Sell value: " + inventory[i].sellValue + "\n";
+                }
+                return inv;
             }
-            return inv;
+            else
+            {
+                for (int i = 0; i < inventory.size(); i++)
+                {
+                    inv += i.ToString() + ": " + inventory[i].toString() + "\n";
+                }
+                return inv;
+            }
         }
 
         public string getInvAsStringSave()
@@ -256,6 +271,26 @@ namespace ConsoleRPG
         public void addItem(Item item)
         {
             inventory.addItem(item);
+        }
+
+        public void removeItem(int index)
+        {
+            if (index < 0 || index >= inventory.size())
+            {
+                Console.WriteLine("Error. No such item (removeItem).");
+            }
+            else
+            {
+                inventory.removeItem(index);
+            }
+        }
+
+        public Item getItem(int index)
+        {
+            if (index < 0 || index >= inventory.size())
+                Console.WriteLine("Error. No such item (getItem).");
+
+            return inventory[index];
         }
 
         public void equipItem(int index)

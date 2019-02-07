@@ -45,7 +45,7 @@ namespace ConsoleRPG
 
         public override string toString()
         {
-            string str = $"{name} |Lvl: {level.ToString()} |Rarity: {rarity.ToString()} |Damage: {damageMin.ToString()}/{damageMax.ToString()} |Value: {sellValue.ToString()}";
+            string str = $"{name} |Lvl: {level.ToString()} |Rarity: {rarity.ToString()} |Damage: {damageMin.ToString()} - {damageMax.ToString()}";
             return str;
         }
 

@@ -22,15 +22,15 @@ namespace ConsoleRPG
         public Enemy (int level)
         {
             this.level = level;
-            hpMax = level * 1;
+            hpMax = rand.Next((level * 2), level *10);
             //enemy's max hp level hpMax = level * 10;
             hp = hpMax;
             damageMin = level * 1;
             damageMax = level * 2;
             
             dropchance = rand.Next(1, 100);
-            defence = rand.Next(1, level*3);
-            accuracy = rand.Next(1, level*3);
+            defence = rand.Next(1, level*5);
+            accuracy = rand.Next(1, level*5);
         }
 
         public bool isAlive()

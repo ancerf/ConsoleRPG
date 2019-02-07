@@ -118,7 +118,7 @@ namespace ConsoleRPG
         {
             do
             {
-                if (choice == 5) //print stats from main menu
+                if (choice == 4) //print stats from main menu
                 {
                     characters[activeCharacter].printStats();
                 }
@@ -335,7 +335,6 @@ namespace ConsoleRPG
                                     int.TryParse(itemsList[actualPosition], out defence);
                                     actualPosition++;
                                     int.TryParse(itemsList[actualPosition], out type);
-                                    actualPosition++;
 
                                     Armor armor_head = new Armor(level, rarity, type) {defence = defence, name = name, buyValue = buyValue, sellValue = sellValue };
                                     temp.armor_head = armor_head;
@@ -516,85 +515,7 @@ namespace ConsoleRPG
                 }
             }
         }
-
-        //            else
-        //            {
-        //                
-        //    
-        //                
-        //                
-        //                int h = -1;
-        //                int position = 0;
-        //                while (end == false)
-        //                {
-        //                    for (int i = position; i < itemsList.Count -2; i++)
-        //                    {
-        //                        h++;
-        //                        int.TryParse(itemsList[h], out itemType);
-        //                        h++;
-        //                        if (itemType == 0)
-        //                        {
-        //                            name = itemsList[h];
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out level);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out rarity);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out buyValue);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out sellValue);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out damageMin);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out damageMax);
-        //    
-        //                            temp.addItem(new Weapon { damageMin = damageMin, damageMax = damageMax, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity });
-        //                        }
-        //    
-        //                        else if(itemType == 1)
-        //                        {
-        //    
-        //                            name = itemsList[h];
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out level);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out rarity);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out buyValue);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out sellValue);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out defence);
-        //                            h++;
-        //                            int.TryParse(itemsList[h], out type);
-        //    
-        //                            temp.addItem(new Armor { type = type, defence = defence, name = name, level = level, buyValue = buyValue, sellValue = sellValue, rarity = rarity });
-        //    
-        //                        }
-        //    
-        //                        characters.Add(temp);
-        //                        i = i + 7;
-        //    
-        //                        if (h == (itemsList.Count -2))
-        //                            end = true;
-        //    
-        //                    }
-        //    
-        //                    
-        //                }
-        //    
-        //                
-        //    
-        //                
-        //    
-        //                Console.WriteLine($"Character {temp.name} loaded!");
-        //            }
-        //        }
-        //    }
-        //
-        //    if (characters.Count <= 0)
-        //        Console.WriteLine("No chracters found!");
-        //}
+        
 
         public void selectCharacter()
         {
@@ -690,14 +611,13 @@ namespace ConsoleRPG
                 Console.WriteLine($"\n= Active character: {characters[activeCharacter].name} Nr: {activeCharacter + 1} / {characters.Count}");
                 Console.WriteLine("\n0: Quit ");
                 Console.WriteLine("1: Travel ");
-                Console.WriteLine("2: Shop ");
-                Console.WriteLine("3: Level up ");
-                Console.WriteLine("4: Rest ");
-                Console.WriteLine("5: Character sheet ");
-                Console.WriteLine("6: Create a new character ");
-                Console.WriteLine("7: Select character");
-                Console.WriteLine("8: Save characters");
-                Console.WriteLine("9: Load characters");
+                Console.WriteLine("2: Level up ");
+                Console.WriteLine("3: Rest ");
+                Console.WriteLine("4: Character sheet ");
+                Console.WriteLine("5: Create a new character ");
+                Console.WriteLine("6: Select character");
+                Console.WriteLine("7: Save characters");
+                Console.WriteLine("8: Load characters");
 
                 Console.Write("\nChoice: ");
 
@@ -708,10 +628,10 @@ namespace ConsoleRPG
                 {
                     string strchoice = Console.ReadLine();
                     bool success = Int32.TryParse(strchoice, out choice);
-                    if (success && Enumerable.Range(0, 11).Contains(choice))
+                    if (success && Enumerable.Range(0, 9).Contains(choice))
                         break;
                     else
-                        Console.Write("\nWrong choice. Please enter new choice (0-10): ");
+                        Console.Write("\nWrong choice. Please enter new choice (0-8): ");
                 }
                 while (true);
 
@@ -724,26 +644,26 @@ namespace ConsoleRPG
                     case 1: // travel
                         travel();
                         break;
-                    case 3: // level up
+                    case 2: // level up
                         levelUpCharacter();
                         break;
-                    case 4: // rest
+                    case 3: // rest
                         rest();
                         break;
-                    case 5: //character sheet
+                    case 4: //character sheet
                         characterMenu();
                         break;
-                    case 6: //create new character
+                    case 5: //create new character
                         createNewCharacter();
                         saveCharacters();
                         break;
-                    case 7: //save characters
+                    case 6: //save characters
                         selectCharacter();
                         break;
-                    case 8: //save characters
+                    case 7: //save characters
                         saveCharacters();
                         break;
-                    case 9: //load characters
+                    case 8: //load characters
                         loadCharacters();
                         break;
                     default:

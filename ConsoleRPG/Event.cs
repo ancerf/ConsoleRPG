@@ -8,10 +8,10 @@ namespace ConsoleRPG
 {
     class Event
     {
-
+        static int nrOfEvents = 3;
         Random random = new Random();
 
-        public int nrOfEvents { get; set; } = 2;
+        //public int nrOfEvents { get; set; } = 3; changed to static
 
         public void generateEvent(Character character, List <Enemy> enemies)
         {
@@ -28,16 +28,166 @@ namespace ConsoleRPG
                     //Puzzle
                     puzzleEncounter(character);
                     break;
+                    //Shop encounter
                 case 2:
-                    break;
-                case 3:
+                    shopEncounter(character);
                     break;
                 default:
                     break;
             }
 
         }
+        public void shopEncounter(Character character)
+        {
+            int choice = 0;
+            bool shopping = true;
+            string inv = "";
 
+            //Init merchant inv
+            int nrOfItems = random.Next(10, 20);
+            int coinToss = 0;
+            Inventory merchantInv = new Inventory();
+
+            for (int i = 0; i < nrOfItems; i++)
+            {
+                coinToss = random.Next(0, 100);
+                if (coinToss > 50)
+                {
+                    merchantInv.addItem(new Weapon(random.Next((int)character.level, (int)character.level + random.Next(1, 5)), random.Next(0, 5)));
+                }
+                else
+                    merchantInv.addItem(new Armor(random.Next((int)character.level, (int)character.level + random.Next(1, 5)), random.Next(0, 5), -1));
+            }
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("= Shop Menu =\n");
+                Console.WriteLine("0: Leave ");
+                Console.WriteLine("1: Buy ");
+                Console.WriteLine("2: Sell ");
+                do
+                {
+                    Console.Write("\nYour choice: ");
+                    string strchoice = Console.ReadLine();
+                    bool success = Int32.TryParse(strchoice, out choice);
+                    if (success && Enumerable.Range(0, 3).Contains(choice))
+                        break;
+                    else
+                        Console.Write("\nFault input. Please enter new choice (0-2): ");
+                }
+                while (true);
+
+            
+                switch (choice)
+                {
+                    case 0://leave
+                        shopping = false;
+                        break;
+                    case 1://Buy     
+                        do
+                        {
+                            Console.Write($"= Buy Menu =\n");
+
+                            Console.Write($"Your Gold: {character.gold} \n\n");
+                            for (int i = 0; i < merchantInv.size(); i++)
+                            {
+                                inv += i.ToString() + ": " + merchantInv[i].toString() + " " + " |Price: " + merchantInv[i].buyValue.ToString() + "\n";
+                            }
+                            Console.WriteLine(inv);
+                            Console.WriteLine($"({merchantInv.size()}) to cancel");
+                            Console.Write("\nYour choice: ");
+                            string strchoice = Console.ReadLine();
+                            Console.Write($"Your Gold: {character.gold} \n\n");
+                            bool success = Int32.TryParse(strchoice, out choice);
+                            if (success && Enumerable.Range(0, merchantInv.size()+1).Contains(choice))
+                                break;
+                            else
+                                Console.Write($"\nFault input. Please enter new choice (0-{merchantInv.size()}): ");
+                        }
+                        while (true);
+
+                        if (choice == merchantInv.size())
+                        {
+                            Console.WriteLine($"Cancelled...");
+                            Console.WriteLine("Press ENTER to continue...");
+                            Console.ReadLine();
+                            break;
+                        }
+
+                        else
+                        {
+                            if (character.gold >= merchantInv[choice].buyValue)
+                            {
+                                character.payGold(merchantInv[choice].buyValue);
+                                character.addItem(merchantInv[choice]);
+
+                                Console.WriteLine($"Bought item {merchantInv[choice].name} - {merchantInv[choice].buyValue}");
+
+                                merchantInv.removeItem(choice);
+                                nrOfItems--;
+                            }
+                            else
+                            {
+                                Console.Write($"Can't buy selected item!");
+                            }
+                        }
+                        Console.WriteLine("Press ENTER to continue...");
+                        Console.ReadLine();
+
+                        break;
+                    case 2://Sell 
+                        Console.WriteLine($"{character.getInvAsString(true)}");
+
+                        Console.Write($"= Sell Menu =\n");
+
+                        Console.Write($"Your Gold: {character.gold} \n\n");
+
+                        if (character.getInventorySize() > 0)
+                        {
+                            do
+                            {
+                                Console.WriteLine($"{character.getInventorySize()} to cancel");
+                                Console.Write("\nYour choice: ");
+                                string strchoice = Console.ReadLine();
+                                Console.Write($"Your Gold: {character.gold} \n\n");
+                                bool success = Int32.TryParse(strchoice, out choice);
+                                if (success && Enumerable.Range(0, character.getInventorySize()+1).Contains(choice))
+                                    break;
+                                else
+                                    Console.Write($"\nFault input. Please enter new choice (0-{character.getInventorySize()}): ");
+                            }
+                            while (true);
+
+                            if (choice == character.getInventorySize())
+                            {
+                                Console.WriteLine($"Cancelled...");
+                                Console.WriteLine("Press ENTER to continue...");
+                                Console.ReadLine();
+                                break;
+                            }
+                                
+
+                            character.gainGold(character.getItem(choice).sellValue);
+                            Console.WriteLine("Item sold!");
+                            Console.WriteLine($"Gold earned: {character.getItem(choice).sellValue}!\n\n");
+                            character.removeItem(choice);
+
+                        }
+
+                        else
+                        {
+                            Console.Write($"\nYou don't have any inventory for sell!\n");
+                        }
+                        Console.WriteLine("Press ENTER to continue...");
+                        Console.ReadLine();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            while (shopping == true);
+            Console.WriteLine("\nYou left the shop.. \n");
+        }
         public void enemyEncounter(Character character, List<Enemy> enemies)
         {
             bool playerTurn = false;
@@ -67,8 +217,6 @@ namespace ConsoleRPG
             //Battle variables
             int damage = 0;
             int gainExp = 0;
-            int playerAccuracy = 0;
-            int playerDefence = 0;
             int playerTotal = 0;
             int enemyTotal = 0;
             int combatTotal = 0;
@@ -118,18 +266,26 @@ namespace ConsoleRPG
                                     {
                                         Console.WriteLine($"{i}: Level: {enemies[i].level} - HP: {enemies[i].hp}/{enemies[i].hpMax} - Defence: {enemies[i].defence} - Accuracy: {enemies[i].accuracy}");
                                     }
-
+                                    Console.WriteLine($"({enemies.Count}) to cancel");
                                     Console.Write("\nChoice: ");
+                                    
+
                                     do
                                     {
                                         string strchoice = Console.ReadLine();
                                         bool success = Int32.TryParse(strchoice, out choice);
-                                        if (success && Enumerable.Range(0, enemies.Count).Contains(choice))
+                                        if (success && Enumerable.Range(0, enemies.Count + 1).Contains(choice))
                                             break;
                                         else
                                             Console.Write($"\nWrong choice. Please enter new choice (0-{enemies.Count}): ");
                                     }
                                     while (true);
+
+                                    if (choice == enemies.Count)
+                                    {
+                                        Console.WriteLine($"Cancelled...");
+                                        break;
+                                    }
 
                                     //Attack roll
                                     combatTotal = enemies[choice].defence + character.accuracy;
@@ -138,13 +294,10 @@ namespace ConsoleRPG
                                     combatRollPlayer = random.Next(1, playerTotal);
                                     combatRollEnemy = random.Next(1, enemyTotal);
 
-                                    //Console.WriteLine($"combatTotal: {combatTotal}");
-                                    //Console.WriteLine($"enemyTotal: {enemyTotal}");
-                                    //Console.WriteLine($"playerTotal: {playerTotal}");
                                     Console.WriteLine($"Player role: {combatRollPlayer}");
                                     Console.WriteLine($"Enemy role: {combatRollEnemy}");
 
-                                    if (combatRollPlayer < combatRollEnemy)//hit
+                                    if (combatRollPlayer > combatRollEnemy)//hit
                                     {
                                         Console.WriteLine("HIT!");
                                         damage = random.Next(character.damageMin, character.damageMax);
@@ -223,8 +376,6 @@ namespace ConsoleRPG
                                 else if (!playerTurn && !enemiesDefeated && !playerDefeated)
                                 {
                                     Console.WriteLine($"= ENEMY TURN =");
-                                    //Console.WriteLine("Continue...");
-                                    //Console.ReadLine();
 
                                     //Enemy attack
                                     for (int i = 0; i < enemies.Count; i++)
@@ -232,7 +383,7 @@ namespace ConsoleRPG
                                         Console.WriteLine("Continue...");
                                         Console.ReadLine();
 
-                                        Console.WriteLine($"ENEMY: {i} \n");
+                                        Console.WriteLine($"ENEMY: {i}");
 
 
                                         //Attack roll
@@ -252,6 +403,8 @@ namespace ConsoleRPG
                                             character.takeDamage(damage);
 
                                             Console.WriteLine($"Damage: {damage}! \n");
+                                            Console.WriteLine("Continue...");
+                                            Console.ReadLine();
 
                                             if (!character.isAlive())
                                             {

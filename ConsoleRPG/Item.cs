@@ -17,8 +17,8 @@ namespace ConsoleRPG
         public Item(int itemType, int level, int rarity)
         {
             this.rarity = rarity;
-            this.level = random.Next(0, level);
-            buyValue = level * rarity * 10;
+            this.level = random.Next(1, (level+1));
+            buyValue = this.level + this.rarity + this.level * this.rarity * 10;
             sellValue = buyValue / 2;
             this.itemType = itemType;
         }

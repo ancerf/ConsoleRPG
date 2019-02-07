@@ -1,10 +1,2 @@
-3 aaaa 1 100 1 420 1 1 1 1 196 1 0 -1 EMPTY 0 0 0 0 0 0 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 
-0 Butter_Knife 0 3 30 15 10 26 1 Bro_Saver 0 2 20 10 18 0 
-3 bbbb 1 100 1 520 1 1 1 1 195 1 0 -1 EMPTY 0 0 0 0 0 0 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 
-0 Butter_Knife 0 1 10 5 5 11 1 Iron_Sheets 0 1 10 5 11 2 
-3 cccc 0 100 1 20 1 1 1 1 200 1 0 -1 EMPTY 0 0 0 0 0 0 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 
-3 dddd 2 100 1 338 1 1 1 1 196 1 0 -1 EMPTY 0 0 0 0 0 0 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 
-0 Katana_Sword 0 1 10 5 6 12 
-3 eeee 0 100 1 20 1 1 1 1 200 1 0 -1 EMPTY 0 0 0 0 0 0 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 
-3 ffff 1 100 1 720 1 1 1 1 188 1 0 0 Bro_Knife 0 4 40 20 13 37 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 
-1 Bro_Saver 0 2 20 10 18 1 1 Cotton_Rag 0 1 10 5 11 2 
+3 Gleb 1 100 1 720 5 5 5 5 31 8 0 -1 EMPTY 0 0 0 0 0 0 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 -1 EMPTY 0 0 0 0 0 -1 
+0 Butter_Knife 1 3 34 17 12 29 1 Devlish_Defender 1 2 23 11 17 0 1 Cotton_Rag 1 2 23 11 18 1 1 Iron_Sheets 1 1 12 6 12 3 
