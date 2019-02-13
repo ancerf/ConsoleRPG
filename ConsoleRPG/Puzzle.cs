@@ -9,11 +9,10 @@ namespace ConsoleRPG
 {
     class Puzzle
     {
-        public string question { get; set; }
         List<string> answers = new List<string>();
+        public string question { get; set; }
         public string answer { get; set; } = "";
         public int correctAnswer { get; set; } = 0;
-
         public int nrOfAns { get; set; }
 
         public Puzzle(string fileName)
@@ -41,12 +40,7 @@ namespace ConsoleRPG
                 answer += i.ToString() + ": " + answers[i] + "\n";
             }
 
-            //return question + "\n" + "\n"
-            //    + answer + "\n"
-            //    + correctAnswer.ToString() + "\n";
-
-            return question + "\n" + "\n"
-               + answer + "\n";
+            return question + "\n" + "\n" + answer + "\n";
         }
     }
 }

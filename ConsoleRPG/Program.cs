@@ -17,20 +17,9 @@ namespace ConsoleRPG
             game.activeCharacter = 0;
             game.fileName = "characters.txt";
 
-            //Item item = new Item();
-
-            //Inventory inventory = new Inventory();
-            //inventory.addItem(item);
-            //inventory.addItem(item);
-            //inventory.addItem(item);
-
-
-            //inventory.debugPrint();
-
             while (game.playing == true)
             {
                 game.mainMenu();
-
             }
         }
     }

@@ -8,7 +8,37 @@ namespace ConsoleRPG
 {
     class Character
     {
-        //Functions
+        Inventory inventory = new Inventory();
+        Random random = new Random();
+        public Weapon weapon { get; set; } = new Weapon();
+        public Armor armor_head { get; set; } = new Armor();
+        public Armor armor_chest { get; set; } = new Armor();
+        public Armor armor_arms { get; set; } = new Armor();
+        public Armor armor_legs { get; set; } = new Armor();
+
+        public string name { get; set; }
+        public double level { get; set; }
+        public double exp { get; set; }
+        public double expNext { get; set; }
+        public int gold { get; set; }
+
+        public int hpMax { get; set; }
+        public int hp { get; set; }
+        public int stamina { get; set; }
+        public int staminaMax { get; set; }
+        public int damageMin { get; set; }
+        public int damageMax { get; set; }
+        public int defence { get; set; }
+        public int accuracy { get; set; }
+        public int luck { get; set; }
+
+        public int strength { get; set; }
+        public int vitality { get; set; }
+        public int dexterity { get; set; }
+        public int intelligence { get; set; }
+        public int statPoints { get; set; }
+        public int distanceTravelled { get; set; }
+
         public void initialize(string name)
         {
             distanceTravelled = 0;
@@ -18,8 +48,7 @@ namespace ConsoleRPG
             this.name = name;
             level = 1;
             exp = 20;
-
-            hp = 200;
+            hp = 50;
 
             strength = 5;
             vitality = 5;
@@ -27,18 +56,9 @@ namespace ConsoleRPG
             intelligence = 5;
 
             statPoints = 0;
-
-            //inventory.addItem(new Armor(1, 1));
-            //inventory.addItem(new Weapon(1, 1));
-            //inventory.addItem(new Armor(1, 1));
-            //inventory.addItem(new Weapon(1, 1));
-            //inventory.addItem(new Armor(1, 1));
-            //inventory.addItem(new Weapon(1, 1));
+            
 
             updateStats();
-
-
-            
         }
 
         public void printStats()
@@ -61,11 +81,6 @@ namespace ConsoleRPG
             Console.WriteLine($"= Luck: {luck} \n");
             Console.WriteLine($"= Distance Travelled: {distanceTravelled}");
             Console.WriteLine($"= Gold: {gold} \n");
-            //for (int i = 0; i < inventory.size(); i++)
-            //{
-            //    Console.WriteLine($"{(i.ToString())}: {inventory[i].toString()}");
-            //}
-
             Console.WriteLine($"= Weapon: {weapon.name} " +
                 $"Lvl: {weapon.level} " +
                 $"Dam {weapon.damageMin} - {weapon.damageMax}");
@@ -100,7 +115,7 @@ namespace ConsoleRPG
             accuracy = dexterity / 2 + intelligence;
             luck = intelligence;
 
-            hp = hpMax; //NOT SURE IF REEALLY NEEDED
+            hp = hpMax;
         }
 
         public void levelUp()
@@ -196,8 +211,6 @@ namespace ConsoleRPG
             }
             return inv;
         }
-
-
 
         public void addToStat(int stat, int value)
         {
@@ -357,47 +370,5 @@ namespace ConsoleRPG
                 }
             }
         }
-        
-        public int distanceTravelled { get; set; }
-
-        Inventory inventory = new Inventory();
-        //Weapon weapon = new Weapon();
-        //Armor armor_head = new Armor();
-        //Armor armor_chest = new Armor();
-        //Armor armor_arms = new Armor();
-        //Armor armor_legs = new Armor();
-
-        public Weapon weapon { get; set; } = new Weapon();
-        public Armor armor_head { get; set; } = new Armor();
-        public Armor armor_chest { get; set; } = new Armor();
-        public Armor armor_arms { get; set; } = new Armor();
-        public Armor armor_legs { get; set; } = new Armor();
-
-        Random random = new Random();
-
-        public int gold { get; set; } 
-
-        public string name { get; set; }
-        public double level { get; set; }
-        public double exp { get; set; }
-        public double expNext { get; set; }
-
-        public int hpMax { get; set; }
-        public int hp { get; set; }
-        public int stamina { get; set; }
-        public int staminaMax { get; set; }
-        public int damageMin { get; set; }
-        public int damageMax { get; set; }
-        public int defence { get; set; }
-        public int accuracy { get; set; }
-        public int luck { get; set; }
-
-        public int strength { get; set; }
-        public int vitality { get; set; }
-        public int dexterity { get; set; }
-        public int intelligence { get; set; }
-
-
-        public int statPoints { get; set; }
     }
 }

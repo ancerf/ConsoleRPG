@@ -8,34 +8,7 @@ namespace ConsoleRPG
 {
     class Inventory
     {
-
-        private int cap = 5;
-        private int nrOfItems = 0;
-
         public List<Item> itemArr = new List<Item>();
-
-        //private void expand()
-        //{
-        //    cap *= 2;
-        //
-        //    List<Item>tempArr = new List<Item>();
-        //
-        //    for (int i = 0; i < nrOfItems; i++)
-        //    {
-        //        tempArr[i] = itemArr[i];
-        //    }
-        //
-        //    //for (int i = 0; i < nrOfItems; i++)
-        //    //{
-        //    //    itemArr[i] = null;
-        //    //}
-        //
-        //    itemArr = null;
-        //
-        //    itemArr = tempArr;
-        //
-        //    initialize(nrOfItems);
-        //}
 
         private void initialize(int from)
         {
@@ -43,16 +16,12 @@ namespace ConsoleRPG
         }
 
         public void addItem(Item item)
-
         {
-            
             itemArr.Add(item);
         }
 
         public void removeItem(int index)
         {
-            //if (index < 0 || index >= nrOfItems)
-            //    Console.WriteLine("Error! Out of bounds remove item inventory.");
             itemArr.RemoveAt(index);
         }
 
@@ -68,14 +37,5 @@ namespace ConsoleRPG
                 return itemArr[index];
             }
         }
-
-
-        //public void debugPrint()
-        //{
-        //    for (int i = 0; i < nrOfItems; i++)
-        //    {
-        //        Console.WriteLine(itemArr[i].debugPrint());
-        //    }
-        //}
     }
 }

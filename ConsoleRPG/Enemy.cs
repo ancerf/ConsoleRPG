@@ -23,7 +23,6 @@ namespace ConsoleRPG
         {
             this.level = level;
             hpMax = rand.Next((level * 2), level *10);
-            //enemy's max hp level hpMax = level * 10;
             hp = hpMax;
             damageMin = level * 1;
             damageMax = level * 2;
@@ -59,10 +58,12 @@ namespace ConsoleRPG
 
             }
         }
+
         public int getDamage()
         {
             return rand.Next(1, (damageMax - damageMin));
         }
+
         public int getExp()
         {
             return level*100;

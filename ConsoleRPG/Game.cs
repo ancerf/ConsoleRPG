@@ -9,7 +9,18 @@ namespace ConsoleRPG
 {
     class Game
     {
-        //Operators
+        Random random = new Random();
+
+        List<Enemy> enemies = new List<Enemy>();
+        List<Character> characters = new List<Character>();
+        List<Inventory> tempItems = new List<Inventory>();
+
+        private int choice;
+        public bool playing { get; set; } = true;
+        public int activeCharacter;
+        public string fileName { get; set; } = "characters.txt";
+        public int help { get; set; } = 0;
+        public bool end { get; set; } = false;
 
         //Functions
         public void initGame()
@@ -24,23 +35,6 @@ namespace ConsoleRPG
                 createNewCharacter();
                 saveCharacters();
             }
-
-            Weapon initW = new Weapon();
-            Armor initA = new Armor();
-
-            //initW.initNames();
-            //initA.initNames();
-
-            //Weapon w1 = new Weapon (10, random.Next(1, 5));
-            //Weapon w2 = new Weapon (10, random.Next(1, 5));
-            //Weapon w3 = new Weapon (10, random.Next(1, 5));
-            //
-            //Console.WriteLine($"R:{w1.rarity} D:{w1.damageMax} L:{w1.level} {w1.name}");
-            //Console.WriteLine($"R:{w2.rarity} D:{w2.damageMax} L:{w2.level} {w2.name}");
-            //Console.WriteLine($"R:{w3.rarity} D:{w3.damageMax} L:{w3.level} {w3.name}");
-
-            
-            
         }
 
         public void createNewCharacter()
@@ -57,13 +51,11 @@ namespace ConsoleRPG
                     Console.Write("\nEnter character name: ");
                     name = Console.ReadLine();
                 }
-
             }
         
             characters.Add(new Character ());
             activeCharacter = characters.Count - 1;
             characters[activeCharacter].initialize(name);
-           
         }
 
         public void levelUpCharacter()
@@ -140,7 +132,7 @@ namespace ConsoleRPG
                     if (success && Enumerable.Range(0, 3).Contains(choice))
                         break;
                     else
-                        Console.Write("\nWrong choice. Please enter new choice (0-1): ");
+                        Console.Write("\nWrong choice. Please enter new choice (0-2): ");
                 }
                 while (true);
 
@@ -186,7 +178,6 @@ namespace ConsoleRPG
                 for (int i = 0; i < characters.Count; i++)
                 {
                     writetext.WriteLine($"3 {characters[i].getAsString()}");
-                    //Console.WriteLine($"{characters[i].getAsString()}");
                     if (characters[i].getInvAsStringSave() != "")
                     {
                         writetext.WriteLine($"{characters[i].getInvAsStringSave()}");
@@ -219,9 +210,6 @@ namespace ConsoleRPG
             int type = 0;
             int damageMin = 0;
             int damageMax = 0;
-            int itemLevel = 0;
-            //name
-            //level
             int buyValue = 0;
             int sellValue = 0;
             int rarity = 0;
@@ -234,8 +222,6 @@ namespace ConsoleRPG
 
                 while ((profile = readtext.ReadLine()) != null)
                 {
-
-
                     end = false;
                         List<string> itemsList = new List<string>();
 
@@ -244,8 +230,6 @@ namespace ConsoleRPG
                     {
                         break;
                     }
-
-                    //string[] items = profile.Split(' ');
 
                     if (Convert.ToInt32(itemsList[0]) == 3)
                     {
@@ -256,7 +240,6 @@ namespace ConsoleRPG
 
                         if (profile != null)
                         {
-
                             name = itemsList[1];
                             int.TryParse(itemsList[2], out distanceTravelled);
                             int.TryParse(itemsList[3], out gold);
@@ -363,9 +346,6 @@ namespace ConsoleRPG
                                     temp.armor_chest = armor_chest;
                                 }
 
-
-
-
                                 else if (Convert.ToInt32(itemsList[actualPosition]) == 1 && Convert.ToInt32(itemsList[actualPosition + 7]) == 2)
                                 {
                                     //armors arms
@@ -388,7 +368,6 @@ namespace ConsoleRPG
                                     Armor armor_arms = new Armor(level, rarity, type) { defence = defence, name = name, buyValue = buyValue, sellValue = sellValue };
                                     temp.armor_arms = armor_arms;
                                 }
-
 
                                 else if (Convert.ToInt32(itemsList[actualPosition]) == 1 && Convert.ToInt32(itemsList[actualPosition + 7]) == 3)
                                 {
@@ -485,16 +464,12 @@ namespace ConsoleRPG
                                     temp.addItem(new Armor (level, rarity, type) {defence = defence, name = name,  buyValue = buyValue, sellValue = sellValue});
             
                                 }
-            
-                                
+
                                 i = i + 7;
             
                                 if (h == (itemsList.Count -1))
                                     end = true;
-            
                             }
-                            
-
                         }
 
                         characters.Add(temp);
@@ -508,6 +483,7 @@ namespace ConsoleRPG
                 {
                     characters.Add(temp);
                 }
+
                 else
                 {
                     if (characters.Count <= 0)
@@ -515,7 +491,6 @@ namespace ConsoleRPG
                 }
             }
         }
-        
 
         public void selectCharacter()
         {
@@ -602,11 +577,11 @@ namespace ConsoleRPG
 
             if (characters[activeCharacter].isAlive())
             {
+                Console.Clear();
                 if (characters[activeCharacter].exp >= characters[activeCharacter].expNext)
                 {
                     Console.WriteLine("!Level up Available! ");
                 }
-                //Console.Write("= MAIN MENU =\n\\n1: Travel \n2: Shop \n3: Level up \n4: Rest \n5: Character sheet \n\nChoice: ");
                 Console.Write("\n= MAIN MENU = \n");
                 Console.WriteLine($"\n= Active character: {characters[activeCharacter].name} Nr: {activeCharacter + 1} / {characters.Count}");
                 Console.WriteLine("\n0: Quit ");
@@ -620,8 +595,6 @@ namespace ConsoleRPG
                 Console.WriteLine("8: Load characters");
 
                 Console.Write("\nChoice: ");
-
-                //choice = Convert.ToInt32(Console.ReadLine());
 
                 //choice get & check loop
                 do
@@ -692,29 +665,11 @@ namespace ConsoleRPG
                     playing = false;
             }
         }
-
-        //Accesors
+        
         public bool getPlaying()
         {
             return this.playing;
         }
-
-        private int choice;
-        public bool playing { get; set; } = true;
-
-        public int activeCharacter;
-        List<Character> characters = new List<Character>();
-        List<Inventory> tempItems = new List<Inventory>();
-
-        public string fileName { get; set; } = "characters.txt";
-
-        public int help { get; set; } = 0;
-        public bool end { get; set; } = false;
-
-        List<Enemy> enemies = new List<Enemy>();
-
-        Random random = new Random();
        
     }
-
 }

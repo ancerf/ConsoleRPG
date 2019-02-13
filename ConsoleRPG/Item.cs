@@ -24,6 +24,7 @@ namespace ConsoleRPG
         }
 
 
+        Random random = new Random();
 
         public string name { get; set; } = "EMPTY";
         public int level { get; set; } = 0;
@@ -32,39 +33,8 @@ namespace ConsoleRPG
         public int rarity { get; set; } = 0;
         public int itemType { get; set; } = -1;
 
-        //if constructors wouldn't work
-        //private int _buyValue;
-        //public int BuyValue
-        //{
-        //    get { return _buyValue; }
-        //    set { _buyValue = level * rarity * 10;}
-        //}
-        //
-        //private int _sellValue;
-        //public int SellValue
-        //{
-        //    get { return _sellValue; }
-        //    set { SellValue = buyValue / 2; }
-        //}
-        //
-        //private int _level;
-        //public int Level
-        //{
-        //    get { return _level; }
-        //    set { _level = random.Next(1, value);}
-        //}
-
-        Random random = new Random();
-
         public virtual string toString() { return null; }
         public virtual string toStringSave() { return null; }
 
-
-        //public abstract Item Clone();
-
-        public string debugPrint()
-        {
-            return name;
-        }
     }
 }

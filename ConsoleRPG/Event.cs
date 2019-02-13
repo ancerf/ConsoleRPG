@@ -11,8 +11,6 @@ namespace ConsoleRPG
         static int nrOfEvents = 3;
         Random random = new Random();
 
-        //public int nrOfEvents { get; set; } = 3; changed to static
-
         public void generateEvent(Character character, List <Enemy> enemies)
         {
             Random rand = new Random();
@@ -35,8 +33,8 @@ namespace ConsoleRPG
                 default:
                     break;
             }
-
         }
+
         public void shopEncounter(Character character)
         {
             int choice = 0;
@@ -165,13 +163,11 @@ namespace ConsoleRPG
                                 Console.ReadLine();
                                 break;
                             }
-                                
 
                             character.gainGold(character.getItem(choice).sellValue);
                             Console.WriteLine("Item sold!");
                             Console.WriteLine($"Gold earned: {character.getItem(choice).sellValue}!\n\n");
                             character.removeItem(choice);
-
                         }
 
                         else
@@ -269,7 +265,6 @@ namespace ConsoleRPG
                                     Console.WriteLine($"({enemies.Count}) to cancel");
                                     Console.Write("\nChoice: ");
                                     
-
                                     do
                                     {
                                         string strchoice = Console.ReadLine();
@@ -314,31 +309,31 @@ namespace ConsoleRPG
 
                                             //Item roll
                                             int roll = random.Next(1, 100);
-                                            int rarity = 0;
+                                            int rarity = 1;
 
                                             if (roll > 20)
                                             {
-                                                rarity = 1; //Common
+                                                rarity = 2; //Common
 
                                                 roll = random.Next(1, 100);
                                                 if (roll > 30)
                                                 {
-                                                    rarity = 2; //Uncommon
+                                                    rarity = 3; //Uncommon
 
                                                     roll = random.Next(1, 100);
                                                     if (roll > 50)
                                                     {
-                                                        rarity = 3; //Rare
+                                                        rarity = 4; //Rare
 
                                                         roll = random.Next(1, 100);
                                                         if (roll > 70)
                                                         {
-                                                            rarity = 4; //Legendary
+                                                            rarity = 5; //Legendary
 
                                                             roll = random.Next(1, 100);
                                                             if (roll > 79)
                                                             {
-                                                                rarity = 5; //Mychic
+                                                                rarity = 6; //Mychic
                                                             }
                                                         }
                                                     }
@@ -362,8 +357,6 @@ namespace ConsoleRPG
 
                                             enemies.RemoveAt(choice);
                                         }
-
-
                                     }
                                     else//miss
                                     {
@@ -373,6 +366,7 @@ namespace ConsoleRPG
                                     //End turn
                                     playerTurn = false;
                                 }
+
                                 else if (!playerTurn && !enemiesDefeated && !playerDefeated)
                                 {
                                     Console.WriteLine($"= ENEMY TURN =");
@@ -380,11 +374,10 @@ namespace ConsoleRPG
                                     //Enemy attack
                                     for (int i = 0; i < enemies.Count; i++)
                                     {
-                                        Console.WriteLine("Continue...");
-                                        Console.ReadLine();
+                                        //Console.WriteLine("Continue...");
+                                        //Console.ReadLine();
 
                                         Console.WriteLine($"ENEMY: {i}");
-
 
                                         //Attack roll
                                         combatTotal = enemies[i].defence + character.accuracy;
@@ -411,8 +404,6 @@ namespace ConsoleRPG
                                                 Console.WriteLine($"You are defeated! \n");
                                                 playerDefeated = true;
                                             }
-
-
                                         }
                                         else//miss
                                         {
@@ -449,10 +440,11 @@ namespace ConsoleRPG
 
         public void puzzleEncounter(Character character)
         {
-
             bool completed = false;
             int userAnswer = 0;
-            Puzzle puzzle = new Puzzle("1.txt");
+            int nrOfPuzzles = 3;
+            string puzzleToDisplay = random.Next(1, nrOfPuzzles).ToString() + ".txt";
+            Puzzle puzzle = new Puzzle(puzzleToDisplay);
             puzzle.getAsString();
 
             //random chances Exp
@@ -460,8 +452,8 @@ namespace ConsoleRPG
 
             while (!completed)
             {
+                Console.Clear();
                 Console.WriteLine(puzzle.getAsString());
-
                 Console.Write("\nYour answer: ");
 
                 do
@@ -482,10 +474,7 @@ namespace ConsoleRPG
 
                     character.gainExp(randExp);
                     Console.Write("You've gained: " + randExp + " EXP! \n\n");
-
-                    //give user exp and continue
                 }
-
             }
 
             if(completed)

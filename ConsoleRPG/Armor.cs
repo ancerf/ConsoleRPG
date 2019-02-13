@@ -10,6 +10,12 @@ namespace ConsoleRPG
 {
     class Armor : Item
     {
+        Random random = new Random();
+        List<string> names = new List<string>();
+        public int type { get; set; } = -1;
+        public int defence { get; set; } = 0;
+        public string typeStr { get; set; }
+
         public Armor()
         {
             initNames();
@@ -46,23 +52,11 @@ namespace ConsoleRPG
                     break;
             }
 
-            if (rarity == 3)
+            if (rarity == 5)
                 defence += level * 5;
-            else if (rarity == 4)
+            else if (rarity == 6)
                 defence += level * 10;
         }
-
-        public int type { get; set; } = -1;
-        public int defence { get; set; } = 0;
-        public string typeStr { get; set; }
-
-        //if constructors woudln't work
-        /*private int _defence;
-        public int Defence
-        {
-            get { return _defence; }
-            set { _defence = random.Next(1, level * (rarity+1)) + (rarity+1) * 2; }
-        }*/
 
         public override string toString()
         {
@@ -76,8 +70,6 @@ namespace ConsoleRPG
             return str;
         }
 
-        List<string> names = new List<string>();
-
         public void initNames()
         {
             names.Add("Bro_Saver");
@@ -87,9 +79,5 @@ namespace ConsoleRPG
             names.Add("Iron_Sheets");
             names.Add("Assassin_Bedsheets");
         }
-
-        
-
-        Random random = new Random();
     }
 }
